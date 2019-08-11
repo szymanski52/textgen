@@ -1,0 +1,28 @@
+{% extends 'eventsmanager/wrapper.html' %}
+
+{% block content %}
+<center>
+{% if user.is_authenticated %}
+	<div class="horizontal-goals">
+		{% for i in goals %}
+			<div class="goal">
+				<h3>{{ i.goalName }} {{ i.goalInitialDate }} {{ i.goalDeadline }}</h3>
+			</div>
+		{% endfor %}
+	</div>
+<p>Add your life or career goal</p>
+	<form method="post" action="{% url 'goals_add' %}">
+{% csrf_token %}
+{% for i in form %}
+	<label>{{ i.label }}</label>
+	{{ i }}
+	<br>
+{% endfor %}
+<input type="submit" value="create event" />
+<input type="hidden" name="next" value="{% url 'goals' %}" />
+</form>
+{% else %}
+    <input type="hidden" name="next" value="{% url 'login' %}" />
+</center>
+{% endif %}
+{% endblock %}

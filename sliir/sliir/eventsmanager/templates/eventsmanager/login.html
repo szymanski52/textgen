@@ -1,0 +1,24 @@
+{% extends "eventsmanager/wrapper.html" %}
+{% block content %}
+{% if form.errors %}
+<p class="login_error">your login or password, ermmm, not absolutely correct, we're sure that if you'll try one more time you will have success. Do it honey :=3</p>
+{% endif %}
+{% if not user.is_authenticated %}
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{% url 'home' %}" />
+</form>
+{% endif %}
+{% endblock %}

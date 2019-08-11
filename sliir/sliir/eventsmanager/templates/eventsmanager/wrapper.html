@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sliir</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'eventsmanager/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'eventsmanager/events.css' %}">
+</head>
+<body>
+<nav class="top-nav">
+	<div class="sliir-logo"></div>
+</nav>
+<nav class="sub-nav">
+	<ul class="menu-list">
+		<a href="{% url 'home' %}" class="nav-link"><li class="menu-list-li"><h2>Home</h2></li></a>
+		<a href="{% url 'goals' %}" class="nav-link"><li class="menu-list-li"><h2>Goals</h2></li></a>
+		{% if user.is_authenticated %}
+		<a href="{% url 'home' %}" class="nav-link"><li class="menu-list-li"><h2>Profile</h2></li></a>
+		<a href="{% url 'logout' %}" class="nav-link"><li class="menu-list-li"><h2>log out</h2></li></a>
+		{% else %}
+		<a href="{% url 'login' %}" class="nav-link"><li class="menu-list-li"><h2>Sign in</h2></li></a>
+		{% endif %}
+	</ul>
+</nav>
+{% block content %}
+
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

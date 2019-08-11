@@ -1,0 +1,24 @@
+{% extends 'eventsmanager/wrapper.html' %}
+
+{% block content %}
+<center>
+<p>Registration form</p>
+{% if form.errors %}
+<p class="login_error">well, you're trying to register, but do it without respect</p>
+{% endif %}
+{% if not user.is_authenticated %}
+<form method="post" action="{% url 'register' %}">
+{% csrf_token %}
+{% for i in user_form %}
+	<label>{{ i.label }}</label>
+	{{ i }}
+	<br>
+{% endfor %}
+<input type="submit" value="register" />
+<input type="hidden" name="next" value="{% url 'home' %}" />
+</form>
+</center>
+{% else %}
+<p>So, are you happy? Well we think that you've lost so you can close the site or back to the previous page but we didn't make any button for you</p>
+{% endif %}
+{% endblock %}
